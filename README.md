@@ -80,7 +80,9 @@ Socket interface : OS에서 inter-process-communication을 위해 만들어준 �
 -> IP주소를 통해 addressing 만으로는 부족 (건물 정도로 생각)
 
 ->  port number (한 건물안의 호실 정도로 생각)
---- 
+
+---------------------
+
 **process들 사이의 communication**
 process를 어떻게 addressing을 하느냐?
 ip주소와 port number의 결합으로 만든 socket으로 addressing한다!
