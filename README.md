@@ -1,8 +1,8 @@
 # Computer Network
 -----------------
-1강 정리
-## Application Layer
----
+## 1강 정리
+#### Application Layer
+
 <br/><br/>
 
 
@@ -132,7 +132,7 @@ goal : satisfy client request without involving origin
 
 -----------------
 
-### 2강 정리
+## 2강 정리
 
 *cache가 생기면 인터넷이 빨라진다.*
  
@@ -207,7 +207,7 @@ bind시킨다 = matching시킨다
 
 ----------------
 
-### 4강 정리
+## 4강 정리
 - e-mail : <br/>
 1. user agent
 2. mail server
