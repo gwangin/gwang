@@ -81,7 +81,7 @@ Socket interface : OS에서 inter-process-communication을 위해 만들어준 �
 
 ->  port number (한 건물안의 호실 정도로 생각)
 
----------------------
+
 
 **process들 사이의 communication**
 process를 어떻게 addressing을 하느냐?
@@ -152,8 +152,8 @@ organization's own DNS servers, proiding authoritatve hostname to IP mappings fo
 
 컴퓨터의 IP주소 존재 -> 컴퓨터의 이름은 있을수도 없을수도 있다.
 
-TCP는 준비동작이 필요,대신 유실 X
-DNS 는 UDP 소켓으로 작동 - > UDP가 빠르니까, 근데 유실되면?? <br/>
+- > TCP는 준비동작이 필요,대신 유실될 수 있다. X<br/>
+그래서 DNS 는 UDP 소켓으로 작동한다. - > UDP가 빠르니까, 근데 유실 가능성이 있다.<br/>
 DNS에서 송수신하는 메세지 자체는 매우 작다.<br/>
 host name과address 등등이
 유실되도 작은 메세지 이므로 리스크가 작다.<br/>
