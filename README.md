@@ -1,4 +1,6 @@
 # Computer Network
+-----------------
+1강 정리
 ## Application Layer
 ---
 <br/><br/>
@@ -128,7 +130,7 @@ goal : satisfy client request without involving origin
 클라이언트가 자신을 통해 다른 네트워크 서비스에 간접적으로 접속할 수 있게 
 해주는 컴퓨터시 스템, 응용 프로그램
 
-
+-----------------
 
 ### 2강 정리
 
@@ -203,6 +205,7 @@ bind시킨다 = matching시킨다
 - read : int fd, void *buf, size_t count
 - write : int fd, const void *buf, size_t count
 
+----------------
 
 ### 4강 정리
 - e-mail : <br/>
