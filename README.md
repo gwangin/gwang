@@ -220,7 +220,7 @@ bind시킨다 = matching시킨다
 
 **TCP 혹은 UDP segment를 상대방 TCP,UDP 쪽으로 전달**
 
-HTTP와 같은 Application layer의 전송단위를 Message라고 부른다.<br/>
+- > HTTP와 같은 Application layer의 전송단위를 Message라고 부른다.<br/>
 이 Message가 Socket을 통해 내려오게 되면 Transport layer의 전송단위인 Segment로 들어간다.<br/>
 TCP와 UDP는 segment이다. segement는 header와 data로 구성되어 있다.<br/>
 이 때 Message는  data부분으로 들어가게 된다.<br/>
