@@ -223,8 +223,7 @@ bind시킨다 = matching시킨다
 - > HTTP와 같은 Application layer의 전송단위를 Message라고 부른다.<br/>
 이 Message가 Socket을 통해 내려오게 되면 Transport layer의 전송단위인 Segment로 들어간다.<br/>
 TCP와 UDP는 segment이다. segement는 header와 data로 구성되어 있다.<br/>
-이 때 Message는  data부분으로 들어가게 된다.<br/>
-이 때 header에는 TCP와 UDP의 port number가 들어간다.(전송하기 위한 부가적인 설명)<br/>
+이 때 Message는  data부분으로 들어가게 되고 header에는 TCP와 UDP의 port number가 들어간다.(전송하기 위한 부가적인 설명)<br/>
 Network later로 내려오게 되면 IP packet이 되고, IP packet은 header와 data로 구성되어 있다.<br/>이 때 segment는 packet의 data부분으로 들어가게 된다.<br/>
 Link layer로 내려오게 되면 frame이 되고, frame은 header와 data로 구성되어 있고 IP packet은 frame의 data부분에 들어가게 된다.<br/>
 
@@ -237,7 +236,7 @@ Link layer로 내려오게 되면 frame이 되고, frame은 header와 data로 �
     - frame : header + data(IP packet)
 
 /*TCP는 UDP에 비해 기능이 많다.*/ <br/>
-공통 기능 : multiplexing, demultiplexing
+**공통 기능 : multiplexing, demultiplexing**<br/>
 Process에서 message를 보냈을 때 알맞는 목적지 process에 전달해주는 것이 multiplexing/demultipexing이다.<br/>
 
 - UDP : Connectionless demuxing<br/>
