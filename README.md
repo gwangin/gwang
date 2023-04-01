@@ -26,11 +26,13 @@ Client <--> Server 간 요청,응답 프로토콜로 구성됨.<br/>
 <br/><br/>
 
 - #### TCP와 IP
+- > UDP : unreliable, connectionless, no flow control, no congestion control<br/>
+- > TCP : reliable, connection-oriented, flow control, congestion control<br/>
+
 TCP/IP는 패킷 통신 방식의 인터넷 프로토콜인 IP (인터넷 프로토콜)와 전송 조절 프로토콜인 TCP (전송 제어 프로토콜)로 이루어져 있다. IP는 패킷 전달 여부를 보증하지 않고, 패킷을 보낸 순서와 받는 순서가 다를 수 있다.(unreliable datagram service) TCP는 IP 위에서 동작하는 프로토콜로, 데이터의 전달을 보증하고 보낸 순서대로 받게 해준다. HTTP, FTP, SMTP 등 TCP를 기반으로 한 많은 수의 애플리케이션 프로토콜들이 IP 위에서 동작하기 때문에, 묶어서 TCP/IP로 부르기도 한다.
 <br/><br/>
 
-- #### TCP (Transmission Control Protocol): 
-
+- #### TCP (Transmission Control Protocol):  
 전송제어 프로토콜
     IP(Internet Protocol Suite)의 핵심.
     TCP/IP라고도 부름
@@ -126,3 +128,129 @@ goal : satisfy client request without involving origin
 
 클라이언트가 자신을 통해 다른 네트워크 서비스에 간접적으로 접속할 수 있게 
 해주는 컴퓨터시 스템, 응용 프로그램
+
+
+
+2023-03-30 정리
+
+cache가 생기면 인터넷이 빨라진다.
+ 
+ HTTP 설명 끝.
+트래픽 등등 여러가지 문제 발생 - >  캐시를 두거나 계층화 
+## DNS(domain name system)
+host domain name - IP address(network address) 의  column
+
+이 큰 DATA base를 관리하기 위해 server를 분산, 계층화 시켜놓음.
+관리가 용이 + 검색이 빠르게...
+
+
+#### TLD (top-level domain) servers : <br/>
+com, org, net, edu, aero, jobs, and all top-level country domains
+<br/>
+
+#### Authoritative DNS servers : <br/>
+organization's own DNS servers, proiding authoritatve hostname to IP mappings for organization's named hosts
+
+컴퓨터의 IP주소 존재 -> 컴퓨터의 이름은 있을수도 없을수도 있다.
+
+TCP는 준비동작이 필요,대신 유실 X
+DNS 는 UDP 소켓으로 작동 - > UDP가 빠르니까, 근데 유실되면?? <br/>
+DNS에서 송수신하는 메세지 자체는 매우 작다. host name과address,,,
+유실되도 작은 메세지 이므로 리스크가 작다.
+통화를 1분 할건데 전화번호 알아내는게 1분걸린다?? TCP<br/>
+전화번호 알아내는데 빠르다! UDP
+
+----
+
+
+## 3강 정리
+
+- Socket 이란?
+process 와 process 사이에 메세지 교환을 할 때(network programming을 하고자 할 때) <br/>process 와 process 사이의 interface가 존재해야함. 이것이 Socket !<br/>
+프로세스는 컴퓨터에서 연속적으로 실행되고 있는 컴퓨터 프로그램<br/>
+
+### OS가 운영체제가 제공하는 2가지 서비스<br/>
+TCP , UDP 두가지 각각 Socket이 존재함
+
+- TCP : sock-stream
+- UDP : sock-dgram
+
+운영체제에서 제공하는 시스템<br/>
+웹 클라이언트와 웹 서버
+
+bind시킨다 = matching시킨다
+
+### TCP server
+1.  socket() : create an endpoint for communication
+2.  bind() : assign a local protocol address to the socket
+3. listen() : make socket a passive socket, waiting for connection request
+4. accept() : extract the first connection request on the queue of pending connections, create a new connected socket, and return a new file descriptor referring to that socket, (blocks until connection from client is established)
+5. connect() : initiate a connection on a socket
+6. read() : read data from a file descriptor
+7. process request
+
+### TCP client
+- socket()
+- connect()
+- write()
+
+#### Function :
+- socket : int domain, int type, int protocol
+- bind : int sockfd, struct sockaddr *my_addr, int addrlen
+- listen : int sockfd, int backlog(여러 클라이언트로부터 동시에 접속을 받을 때 처리)
+- accept : int sockfd, struct sockaddr *addr, int *addrlen
+- connect : int sockfd, struct sockaddr *serv_addr, int addrlen
+- read : int fd, void *buf, size_t count
+- write : int fd, const void *buf, size_t count
+
+
+### 4강 정리
+- e-mail : <br/>
+1. user agent
+2. mail server
+3. simple mail transfer protocol (SMTP) (mail access protocols)
+
+
+보내는 서버와 받는 서버가 따로 존재한다.<br/>
+
+**user client   --SMTP-->  sender server  --SMTP-->  receiver server --SMTP-->  user client**
+
+### Transprot layer
+**Applincation layer 바로 밑에 존재 - 조금 더 구체화되어 있다.**<br/>
+
+**TCP 혹은 UDP segment를 상대방 TCP,UDP 쪽으로 전달**
+
+HTTP와 같은 Application layer의 전송단위를 Message라고 부른다.<br/>
+이 Message가 Socket을 통해 내려오게 되면 Transport layer의 전송단위인 Segment로 들어간다.<br/>
+TCP와 UDP는 segment이다. segement는 header와 data로 구성되어 있다.<br/>
+이 때 Message는  data부분으로 들어가게 된다.<br/>
+이 때 header에는 TCP와 UDP의 port number가 들어간다.(전송하기 위한 부가적인 설명)<br/>
+Network later로 내려오게 되면 IP packet이 되고, IP packet은 header와 data로 구성되어 있다.<br/>이 때 segment는 packet의 data부분으로 들어가게 된다.<br/>
+Link layer로 내려오게 되면 frame이 되고, frame은 header와 data로 구성되어 있고 IP packet은 frame의 data부분에 들어가게 된다.<br/>
+
+1. Application layer의 전송단위 : Message
+2. Transport layer의 전송단위 : Segment
+    - Segment : header + data(Message)
+3. Network layer의 전송단위 : IP packet
+    - IP packet : header + data(Segment)
+4. Link layer의 전송단위 : frame
+    - frame : header + data(IP packet)
+
+/*TCP는 UDP에 비해 기능이 많다.*/ <br/>
+공통 기능 : multiplexing, demultiplexing
+Process에서 message를 보냈을 때 알맞는 목적지 process에 전달해주는 것이 multiplexing/demultipexing이다.<br/>
+
+- UDP : Connectionless demuxing<br/>
+socket과 socket 사이 1:1대응이 아니다. <br/>
+source port와 destination port가 같은지 확인하고 전달한다.<br/>
+
+- TCP : Connection-oriented demuxing<br/>
+socket과 socket 사이 1:1대응이다. <br/>
+두 socket끼리 연결되어있다. <br/>
+TCP socket들은 고유의 번호를 가지는게 아니라 고유의 index,ID를 가진다.<br/>
+    - TCP ID = Source IP address + source port 번호 + destination IP address + destination port 번호<br/>
+
+Socket과 Port는 같은 개념이 아니다.<br/>
+하나의 process가 여러개의 socket을 가질 수 있다.<br/>
+sender의 ip, port, receiver의 ip, port 조합 -> 유일하게 한 개!<br/>
+
