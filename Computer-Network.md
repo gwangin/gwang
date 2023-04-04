@@ -308,7 +308,7 @@ Timeout interval : RTT(Round Trip Time) + margin 사용
 
 - 한쌍의 socket이 TCP connection을 맺으면 TCP 쌍마다 buffer가 생성된다.
 
-- Application 계층에서 transport 계층으로 데이터를 보내는 속도와 TCP 의 속도가 다르다.<br/>
+### Application 계층에서 transport 계층으로 데이터를 보내는 속도와 TCP 의 속도가 다르다.<br/>
 > buffer는 이를 맞추기 위해 속도를 조절한다.<br/>
 > flow control : receiver는 sender에게 현재 빈공간(receive window size)이 얼마나 남았는지 알려주고,
 sender 는 이를 통해 flow control을 한다.<br/>
