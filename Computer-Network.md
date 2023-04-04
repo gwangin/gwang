@@ -6,9 +6,9 @@
 <br/><br/>
 
 
-- ### HTTP (Hyper Text Transfer Protocol) :
+#### HTTP (Hyper Text Transfer Protocol) :
 *Web은 HTTP의 별칭* <br/>
-- >W3 상에서 정보를 주고 받을 수 있는 프로토콜<br/>
+>W3 상에서 정보를 주고 받을 수 있는 프로토콜<br/>
  주로 문서를 주고 받으며 TCP를 사용함.<br/>
  TCP는 reliable trasport 하기 떄문에 패킷의 손실없이 송수신가능<br/>
 대신 UDP보다 비싼 비용을 내야함. Network resource에 대한 비용.<br/>
@@ -17,34 +17,35 @@ Client <--> Server 간 요청,응답 프로토콜로 구성됨.<br/>
 굉장히 단순한 프로토콜. 저장 등 다른 기능이 없음.
 <br/><br/>
 
- - #### W3 (World Wide Web) :
- 
-  인터넷에 연결된 컴퓨터를 통해 사람들이 정보를 공유할 수 있는 전세계적 정보 공간
+ #### W3 (World Wide Web) :
+ >인터넷에 연결된 컴퓨터를 통해 사람들이 정보를 공유할 수 있는 전세계적 정보 공간
 <br/><br/>
 
-- #### 인터넷 프로토콜 슈트(영어: Internet Protocol Suite) : 
+#### 인터넷 프로토콜 슈트(영어: Internet Protocol Suite) : 
 
-인터넷에서 컴퓨터들이 서로 정보를 주고받는 데 쓰이는 통신규약(프로토콜)의 모음이다. 인터넷 프로토콜 슈트 중 TCP와 IP가 가장 많이 쓰이기 때문에 TCP/IP 프로토콜 슈트라고도 불린다.
+>인터넷에서 컴퓨터들이 서로 정보를 주고받는 데 쓰이는 통신규약(프로토콜)의 모음이다. 인터넷 프로토콜 슈트 중 TCP와 IP가 가장 많이 쓰이기 때문에 TCP/IP 프로토콜 슈트라고도 불린다.
 <br/><br/>
 
-- #### TCP와 IP
+#### TCP와 IP
     - > UDP : unreliable, connectionless, no flow control, no congestion control<br/>
     - > TCP : reliable, connection-oriented, flow control, congestion control<br/>
 
 TCP/IP는 패킷 통신 방식의 인터넷 프로토콜인 IP (인터넷 프로토콜)와 전송 조절 프로토콜인 TCP (전송 제어 프로토콜)로 이루어져 있다.<br/> IP는 패킷 전달 여부를 보증하지 않고, 패킷을 보낸 순서와 받는 순서가 다를 수 있다.(unreliable datagram service)<br/>TCP는 IP 위에서 동작하는 프로토콜로, 데이터의 전달을 보증하고 보낸 순서대로 받게 해준다.<br/> HTTP, FTP, SMTP 등 TCP를 기반으로 한 많은 수의 애플리케이션 프로토콜들이 IP 위에서 동작하기 때문에, 묶어서 TCP/IP로 부르기도 한다.
 <br/><br/>
 
-- #### TCP (Transmission Control Protocol):  
-전송제어 프로토콜
-    IP(Internet Protocol Suite)의 핵심.
-    TCP/IP라고도 부름
-     TCP는 근거리 통신망이나 인트라넷, 인터넷에 연결된 컴퓨터에서 실행되는 프로그램 간에 일련의 옥텟을 안정적으로, 순서대로, 에러없이 교환할 수 있게 한다. TCP는 전송 계층에 위치한다.
+- TCP (Transmission Control Protocol):  
+>전송제어 프로토콜
+IP(Internet Protocol Suite)의 핵심. <br/>
+TCP/IP라고도 부름 <br/>
+TCP는 근거리 통신망이나 인트라넷, 인터넷에 연결된 컴퓨터에서 실행되는 프로그램 간에 일련의 옥텟을 안정적으로, 순서대로, 에러없이 교환할 수 있게 한다.<br/>
+TCP는 전송 계층에 위치한다.
 <br/><br/>
 
 
-- #### UDP 사용자 데이터그램 프로토콜(User Datagram Protocol) :  
 
-인터넷 프로토콜 스위트의 주요 프로토콜 가운데 하나
+- UDP 사용자 데이터그램 프로토콜(User Datagram Protocol) :  
+
+>인터넷 프로토콜 스위트의 주요 프로토콜 가운데 하나
 
 <br/>
 
@@ -60,45 +61,41 @@ TCP/IP는 패킷 통신 방식의 인터넷 프로토콜인 IP (인터넷 프로
 <br/>
 
 
- - Server 와 Client
+ #### Server 와 Client
 
- client는 뭔가를 필요로 할 때 Action을 취함
+ >client는 뭔가를 필요로 할 때 Action을 취함<br/>
+ server는 항상 같은 위치에서 기다려야함 = 고정된 주소<br/>
+ Program을 OS 위에서 실행시키면 Process가 된다.<br/>
+ process 사이의 communication을 할 때 엄청나게 많은 process중에서 단 하나를 찾아야함.<br/>
 
- server는 항상 같은 위치에서 기다려야함 = 고정된 주소
- <br/>
- Program을 OS 위에서 실행시키면 Process가 된다.
- process 사이의 communication을 할 때
- <br/><br/>
- <br/>
- 엄청나게 많은 process중에서 단 하나를 찾아야함.
- <br/>
-Socket interface : OS에서 inter-process-communication을 위해 만들어준 구멍
+#### Socket interface 
+>OS에서 inter-process-communication을 위해 만들어준 구멍
 
 
 
--> IP주소를 통해 addressing 만으로는 부족 (건물 정도로 생각)
-
-->  port number (한 건물안의 호실 정도로 생각)
-
+*-> IP주소를 통해 addressing 만으로는 부족 (건물 정도로 생각)*<br/>
+*-> port number (한 건물안의 호실 정도로 생각)*
 
 
-**process들 사이의 communication**
-process를 어떻게 addressing을 하느냐?
-ip주소와 port number의 결합으로 만든 socket으로 addressing한다!
+
+**process들 사이의 communication**<br/>
+process를 어떻게 addressing을 하느냐?<br/>
+ip주소와 port number의 결합으로 만든 socket으로 addressing한다!<br/>
 
 ### application 계층 :
-OS에서 제공하는 (transport 계층에서 제공) 정보를 받는다. 하지만 신뢰성 이외의 어떠한 기능도 아래계층에서 해주지 않고 있다.
+OS에서 제공하는 (transport 계층에서 제공) 정보를 받는다. 하지만 신뢰성 이외의 어떠한 기능도 아래계층에서 해주지 않고 있다.<br/>
  
- 보안개념이 없다.
-보안은 결국 어플리케이션 계층에서 담당하게 됨.
+보안개념이 없다.<br/>
+**보안은 결국 어플리케이션 계층에서 담당하게 됨.**<br/>
 
--  internet transport protocols services
+- ####  internet transport protocols services
 
     1. TCP service : **reliable transport** between sending process와 receiving process (flow control, congestion control  제공)
     2. UDP service : **unreliable data** transfer between sending and receiving process
 
 **가장 큰 차이는 신뢰성 유무**
 <br/>
+
 
 클라이언트, 웹브라우저가 HTTP request message 를 보내기 위해서는 TCP connection이 먼저 생성되어야 한다.<br/>
 즉, TCP connection message를 먼저 주고받아야한다.
@@ -107,19 +104,19 @@ OS에서 제공하는 (transport 계층에서 제공) 정보를 받는다. 하�
 *프로토콜의 이름을 먼저 이해하고 프로토콜에서 사용하는 format,field(header...등등)을 이해하기.*<br/>
 *쿠키 :  웹사이트에서 사용자에게 부여한 번호. 추적당하는 것*
 
--  cache 캐시 
+####  cache 캐시 
 
-데이터를 미리 복사해놓는 임시 장소를 가리킴
-    1. 다시 계산하는 시간 절약
-    2. 캐시에 접근하는 시간이  원래 data에 접근하는 시간보다 짧을 떄 사용
+>데이터를 미리 복사해놓는 임시 장소를 가리킴
+1. 다시 계산하는 시간 절약
+2. 캐시에 접근하는 시간이  원래 data에 접근하는 시간보다 짧을 떄 사용
 
 
-Web caches = proxy server
-goal : satisfy client request without involving origin
+*Web caches = proxy server*
+*goal : satisfy client request without involving origin*
 
--  프록시서버 : 
+####  프록시서버 : 
 
-클라이언트가 자신을 통해 다른 네트워크 서비스에 간접적으로 접속할 수 있게 
+>클라이언트가 자신을 통해 다른 네트워크 서비스에 간접적으로 접속할 수 있게 
 해주는 컴퓨터시 스템, 응용 프로그램
 
 -----------------
@@ -304,6 +301,7 @@ Timeout interval : RTT(Round Trip Time) + margin 사용
 
 **segment를 보낼 때 마다 RTT를 측정한다.<br/>재전송 segment를 보낼 때는 Sample RTT를 측정하지 않는다.**<br/>
 **Estimated RTT : ERTT = (1- alpha)* ERTT + alpha * Sample RTT(최근 RTT)**<br/>
+*Segment  크기는 크면 클수록  좋다.*
 
 
 - 한쌍의 socket이 TCP connection을 맺으면 TCP 쌍마다 buffer가 생성된다.
@@ -315,6 +313,9 @@ sender 는 이를 통해 flow control을 한다.<br/>
 > 전송한 segment가 ACK를 받을 때까지 재전송을 위해 send buffer에 저장된다.<br/>
 
 -  window size : sender가 receiver에게 보낼 수 있는 최대 segment의 수<br/>
+    1.window size : RWND 와 CWND 중 더 작은 것<br/>
+    2.received window : RWND (수신 장비 상태)<br/>
+    3.Congestion window  : CWND(네트워크 상태)<br/>
 > TCP는 window size를 통해 flow control을 한다.<br/>
 > 즉, receiver쪽 buffer가 flow control을 한다.<br/>
 > flow control : receiver는 sender에게 현재 빈공간이 얼마나 남았는지 알려주고,
@@ -324,4 +325,35 @@ Receive buffer : in-order delivery를 위해 사용된다.<br/>
 
 - TCP fast retransmit : 1 2 3 4 5 번 sequence 만약 이 중 하나가 유실됐다면,
  같은 ack가 중복해서 보내진다. 이 중복횟수가 3번이되면 재전송한다.<br/>
- <img src="ACK.jpg"  width="1500" height="600">
+ <img src="ACK.jpg"  width="700" height="370">
+
+
+
+
+
+
+
+### TCP : 3-way handshake
+> 1. SYN : sender가 receiver에게 연결을 요청한다.<br/>
+> 2. SYN/ACK : receiver가 sender에게 연결을 수락한다.<br/>
+> 3. ACK : sender가 receiver에게 연결을 수락한다.<br/>
+**여기에는 data를 넣을 수 있다**<br/>
+
+### TCP : Closing a connection (application layer에서 close() 호출)
+> 1. FIN : sender가 receiver에게 연결을 종료하겠다고 요청한다.<br/>
+> 2. ACK : receiver가 sender에게 연결을 종료하겠다고 수락한다.<br/>
+
+-----
+## 7강 정리
+
+#### Congestion control : 네트워크에 과부하가 걸리지 않도록 하는 것<br/>
+>네트워크에 과부하가 걸리면 패킷이 유실될 수 있다.<br/>
+>패킷이 유실되면 이미 지나온 라우터의 네트워크를 낭비한 것이다.<br/>
+>유실이 발생하면 재전송해야하기 때문에 네트워크에 과부하가 걸린다.<br/>
+>전송능력이 더 크지만, 네트워크 과부하를 막기위해 적합한 전송속도를 찾는다 =  Congestion control<br/>
+
+#### Congestion window :  
+>send buffer window size는 receiver buffer window size 와 congestion window size중 더 작은 값이다.
+
+
+#### Maximum Segment Size(MSS) : 
