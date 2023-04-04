@@ -127,15 +127,15 @@ OS에서 제공하는 (transport 계층에서 제공) 정보를 받는다. 하�
  
  HTTP 설명 끝.
 트래픽 등등 여러가지 문제 발생 - >  캐시를 두거나 계층화 
-- #### DNS(domain name system)
+#### DNS(domain name system)
 
-- > Domain name을 IP address로 바꿔주는 시스템이다.<br/>
+> Domain name을 IP address로 바꿔주는 시스템이다.<br/>
 UDP를 사용한다.<br/>
 client와 server로 구성되어 있다.<br/>
 client가 DNS server에게 query를 보내고, DNS server가 client에게 response를 보내는 구조이다.<br/>
 
 
-host domain name - IP address(network address) 의  column
+*host domain name - IP address(network address) 의  column*
 
 이 큰 DATA base를 관리하기 위해 server를 분산, 계층화 시켜놓음.<br/>
 관리가 용이 + 검색이 빠르게
@@ -146,13 +146,13 @@ com, org, net, edu, aero, jobs, and all top-level country domains
 <br/>
 
 #### Authoritative DNS servers : <br/>
-organization's own DNS servers, proiding authoritatve hostname to IP mappings for organization's named hosts
+>organization's own DNS servers, proiding authoritatve hostname to IP mappings for organization's named hosts
 
-컴퓨터의 IP주소 존재 -> 컴퓨터의 이름은 있을수도 없을수도 있다.
+*컴퓨터의 IP주소 존재 -> 컴퓨터의 이름은 있을수도 없을수도 있다.*
 
-- > TCP는 준비동작이 필요,대신 유실될 수 있다. X<br/>
-그래서 DNS 는 UDP 소켓으로 작동한다. - > UDP가 빠르니까, 근데 유실 가능성이 있다.<br/>
-DNS에서 송수신하는 메세지 자체는 매우 작다.<br/>
+>TCP는 준비동작이 필요,대신 유실될 수 있다. X<br/>
+>그래서 DNS 는 UDP 소켓으로 작동한다. - > UDP가 빠르니까, 근데 유실 가능성이 있다.<br/>
+>DNS에서 송수신하는 메세지 자체는 매우 작다.<br/>
 host name과address 등등이
 유실되도 작은 메세지 이므로 리스크가 작다.<br/>
 통화를 1분 할건데 전화번호 알아내는게 1분걸린다?? TCP<br/>
@@ -163,8 +163,8 @@ host name과address 등등이
 
 ## 3강 정리
 
-- Socket 이란?
-process 와 process 사이에 메세지 교환을 할 때(network programming을 하고자 할 때) <br/>process 와 process 사이의 interface가 존재해야함. 이것이 Socket !<br/>
+#### Socket 이란?
+>process 와 process 사이에 메세지 교환을 할 때(network programming을 하고자 할 때) <br/>process 와 process 사이의 interface가 존재해야함. 이것이 Socket !<br/>
 프로세스는 컴퓨터에서 연속적으로 실행되고 있는 컴퓨터 프로그램<br/>
 
 ### OS가 운영체제가 제공하는 2가지 서비스<br/>
@@ -173,12 +173,12 @@ TCP , UDP 두가지 각각 Socket이 존재함
 - TCP : sock-stream
 - UDP : sock-dgram
 
-운영체제에서 제공하는 시스템<br/>
-웹 클라이언트와 웹 서버
+*운영체제에서 제공하는 시스템<br/>*
+*웹 클라이언트와 웹 서버*<br/>
 
-bind시킨다 = matching시킨다
+*bind시킨다 = matching시킨다*
 
-### TCP server
+#### TCP server
 1.  socket() : create an endpoint for communication
 2.  bind() : assign a local protocol address to the socket
 3. listen() : make socket a passive socket, waiting for connection request
@@ -187,7 +187,7 @@ bind시킨다 = matching시킨다
 6. read() : read data from a file descriptor
 7. process request
 
-### TCP client
+#### TCP client
 - socket()
 - connect()
 - write()
@@ -204,7 +204,7 @@ bind시킨다 = matching시킨다
 ----------------
 
 ## 4강 정리
-- e-mail : <br/>
+#### e-mail : <br/>
 1. user agent
 2. mail server
 3. simple mail transfer protocol (SMTP) (mail access protocols)
@@ -294,8 +294,9 @@ TCP는 **reliable data transfer**를 제공한다.<br/>
 
 
 
-- timeout : segment 를 보낸 후 timer를 작동시킨다. 이후 ack가 오지 않으면 timeout이 발생한다.<br/>
-Timeout interval : RTT(Round Trip Time) + margin 사용
+#### timeout : 
+>segment 를 보낸 후 timer를 작동시킨다. 이후 ack가 오지 않으면 timeout이 발생한다.<br/>
+>Timeout interval : RTT(Round Trip Time) + margin 사용
 
 
 
@@ -304,7 +305,7 @@ Timeout interval : RTT(Round Trip Time) + margin 사용
 *Segment  크기는 크면 클수록  좋다.*
 
 
-- 한쌍의 socket이 TCP connection을 맺으면 TCP 쌍마다 buffer가 생성된다.
+*한쌍의 socket이 TCP connection을 맺으면 TCP 쌍마다 buffer가 생성된다.*
 
 ### Application 계층에서 transport 계층으로 데이터를 보내는 속도와 TCP 의 속도가 다르다.<br/>
 > buffer는 이를 맞추기 위해 속도를 조절한다.<br/>
@@ -323,9 +324,10 @@ sender 는 이를 통해 flow control을 한다.<br/>
 
 Receive buffer : in-order delivery를 위해 사용된다.<br/>
 
-- TCP fast retransmit : 1 2 3 4 5 번 sequence 만약 이 중 하나가 유실됐다면,
+#### TCP fast retransmit : 
+>1 2 3 4 5 번 sequence 만약 이 중 하나가 유실됐다면,
  같은 ack가 중복해서 보내진다. 이 중복횟수가 3번이되면 재전송한다.<br/>
- <img src="ACK.jpg"  width="700" height="370">
+ <img src="ACK.jpg"  width="100" height="570">
 
 
 
@@ -357,3 +359,16 @@ Receive buffer : in-order delivery를 위해 사용된다.<br/>
 
 
 #### Maximum Segment Size(MSS) : 
+>단일 TCP 세그먼트 에서 수신할 수 있는 최대 데이터 양<br/>
+>그렇다면 MSS는 어떻게 결정되는가?<br/>
+>네트워크 상태를 보고 결정할텐데, 처음에는 어떻게 설정하는가?
+
+>1. 처음에는  1 segment씩 보낸다.<br/>
+>2. 3-way handshake가 성공하면 2 segment씩 보낸다.<br/>
+>3. 1, 2, 4, 8... 설정한 slow start 지점까지 exponential하게 올라간다.
+>4. slow start 지점에 도달하면 linear하게 증가한다.<br/>
+>5. 실패하면 반으로 줄인다.<br/>
+
+*additive increase : increase CWND by 1 MSS per RTT<br/>*
+*multiplicative decrease : decrease CWND by half after loss*<br/>
+
