@@ -287,12 +287,11 @@ TCP는 **reliable data transfer**를 제공한다.<br/>
 -------
 ## 6강 정리
 
-- pipeline : 한 데이터 처리 단계의 출력이 다음 단계의 입력으로 이어지는 형태로 연결된 구조<br/>
-- pipelining :한 번에 하나의 명령어만 실행하는 것이 아니라 하나의 명령어가 실행되는 도중에 다른 명령어 실행을 시작하는 식으로 동시에 여러 개의 명령어를 실행하는 기법<br/>
+### pipeline : 한 데이터 처리 단계의 출력이 다음 단계의 입력으로 이어지는 형태로 연결된 구조<br/>
+### pipelining :한 번에 하나의 명령어만 실행하는 것이 아니라 하나의 명령어가 실행되는 도중에 다른 명령어 실행을 시작하는 식으로 동시에 여러 개의 명령어를 실행하는 기법<br/>
 
-
-Byte steam number : byte stream을 보낼 때 순서를 매긴다.<br/>
-- > 100byte짜리 데이터를 보내면 100byte의 처음 byte의 번호를 사용한다.<br/>
+- Byte steam number : byte stream을 보낼 때 순서를 매긴다.<br/>
+> 100byte짜리 데이터를 보내면 100byte의 처음 byte의 번호를 사용한다.<br/>
        그 다음 150byte짜리 데이터를 보낼때 그 데이터의 sequence number는 100이 된다.<br/> 
        ACK # 100 : 99번째 byte까지 잘 받았다 라는 뜻.<br/>
 
@@ -301,18 +300,17 @@ Byte steam number : byte stream을 보낼 때 순서를 매긴다.<br/>
 - timeout : segment 를 보낸 후 timer를 작동시킨다. 이후 ack가 오지 않으면 timeout이 발생한다.<br/>
 Timeout interval : RTT(Round Trip Time) + margin 사용
 
-segment를 보낼 때 마다 RTT를 측정한다.<br/>
-
-**재전송 segment를 보낼 때는 Sample RTT를 측정하지 않는다.**<br/>
-
-Estimated RTT : ERTT = (1- alpha)* ERTT + alpha * Sample RTT(최근 RTT)<br/>
 
 
-한쌍의 socket이 TCP connection을 맺으면 TCP 쌍마다 buffer가 생성된다.
+**segment를 보낼 때 마다 RTT를 측정한다.<br/>재전송 segment를 보낼 때는 Sample RTT를 측정하지 않는다.**<br/>
+**Estimated RTT : ERTT = (1- alpha)* ERTT + alpha * Sample RTT(최근 RTT)**<br/>
+
+
+- 한쌍의 socket이 TCP connection을 맺으면 TCP 쌍마다 buffer가 생성된다.
+
 - Application 계층에서 transport 계층으로 데이터를 보내는 속도와 TCP 의 속도가 다르다.<br/>
-
-- Send buffer는 이를 맞추기 위해 속도를 조절한다.<br/>
-전송한 segment가 ACK를 받을 때까지 재전송을 위해 send buffer에 저장된다.<br/>
+> Send buffer는 이를 맞추기 위해 속도를 조절한다.<br/>
+> 전송한 segment가 ACK를 받을 때까지 재전송을 위해 send buffer에 저장된다.<br/>
  
 
 - > window size : sender가 receiver에게 보낼 수 있는 최대 segment의 수<br/>
