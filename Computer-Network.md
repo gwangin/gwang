@@ -307,6 +307,10 @@ TCP는 **reliable data transfer**를 제공한다.<br/>
 
 *한쌍의 socket이 TCP connection을 맺으면 TCP 쌍마다 buffer가 생성된다.*
 
+
+----
+## 7강 정리
+
 ### Application 계층에서 transport 계층으로 데이터를 보내는 속도와 TCP 의 속도가 다르다.<br/>
 > buffer는 이를 맞추기 위해 속도를 조절한다.<br/>
 > flow control : receiver는 sender에게 현재 빈공간(receive window size)이 얼마나 남았는지 알려주고,
@@ -346,7 +350,7 @@ Receive buffer : in-order delivery를 위해 사용된다.<br/>
 > 2. ACK : receiver가 sender에게 연결을 종료하겠다고 수락한다.<br/>
 
 -----
-## 7강 정리
+## 8강 정리
 
 #### Congestion control : 네트워크에 과부하가 걸리지 않도록 하는 것<br/>
 >네트워크에 과부하가 걸리면 패킷이 유실될 수 있다.<br/>
@@ -377,4 +381,31 @@ Receive buffer : in-order delivery를 위해 사용된다.<br/>
 >Router capacity = R<br/>
 >Connection 수 = K<br/>
 >Thoughput = R/K<br/>
- <img src="TCP.jpg"  width="1000" height="570">
+ <img src="TCP.jpg"  width="700" height="570">
+
+ -----
+## 9강 정리
+
+### Network-Layer :
+
+#### Router :
+>패킷을 전송하는데 사용되는 네트워크 장비<br/>
+여러 개의 네트워크 인터페이스를 가진다.<br/>
+#### Forwarding table :
+>Router가 라우팅 결정을 하기 위해 사용하는 데이터 구조<br/>
+목적지 IP 주소와 해당 주소에 대한 다음 홉(다음 라우터)의 정보를 매핑
+#### Longest prefix matching :
+>Forwarding table에서 가장 긴 매치되는 프리픽스(prefix)를 찾아서 해당 라우팅 엔트리를 선택한다.
+#### IP datagram format :
+>IP Packet : IP header + data<br/>
+IP 의 최소크기는 40byte이다.(IPv6)<br/>
+>네트워크망을 관찰해보면 이 최소크기의 packet이 상당 수 있는데,
+이는 TCP ACK 용도의 packet이다.<br/>
+예를 들어 넷플릭스에서 영화를 다운받을 때, user는 큰 용량의 packet을 받지만 그동안 넷플릭스에 보낼 data는 없다. 이때 packet을 받을 때마다 TCP ACK를 보내는데, 이것이 40byte인 packet이다.<br/>
+
+*Subnet mask : 네트워크 부분과 호스트 부분을 구분하기 위한 비트 마스크*<br/>
+
+#### CIDR : Classless Inter-Domain Routing : 
+> IP 주소 공간의 효율적인 할당을 위해 개발된 기술<br/>
+>IP 주소를 더 작은 블록으로 나누어 할당할 수 있도록 IP 주소를 서브넷 마스크와 함께 표기한다.<br/>
+>라우팅 테이블을 더 작고 효율적으로 관리할 수 있다.<br/>
