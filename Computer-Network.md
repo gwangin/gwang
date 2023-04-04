@@ -309,23 +309,23 @@ Timeout interval : RTT(Round Trip Time) + margin 사용
 - 한쌍의 socket이 TCP connection을 맺으면 TCP 쌍마다 buffer가 생성된다.
 
 - Application 계층에서 transport 계층으로 데이터를 보내는 속도와 TCP 의 속도가 다르다.<br/>
-> Send buffer는 이를 맞추기 위해 속도를 조절한다.<br/>
-> 전송한 segment가 ACK를 받을 때까지 재전송을 위해 send buffer에 저장된다.<br/>
- 
-
-- > window size : sender가 receiver에게 보낼 수 있는 최대 segment의 수<br/>
-TCP는 window size를 통해 flow control을 한다.<br/>
-즉, receiver쪽 buffer가 flow control을 한다.<br/>
-flow control : receiver는 sender에게 현재 빈공간이 얼마나 남았는지 알려주고,
+> buffer는 이를 맞추기 위해 속도를 조절한다.<br/>
+> flow control : receiver는 sender에게 현재 빈공간(receive window size)이 얼마나 남았는지 알려주고,
 sender 는 이를 통해 flow control을 한다.<br/>
+> 전송한 segment가 ACK를 받을 때까지 재전송을 위해 send buffer에 저장된다.<br/>
 
-- Receive buffer : in-order delivery를 위해 사용된다.<br/>
+-  window size : sender가 receiver에게 보낼 수 있는 최대 segment의 수<br/>
+> TCP는 window size를 통해 flow control을 한다.<br/>
+> 즉, receiver쪽 buffer가 flow control을 한다.<br/>
+> flow control : receiver는 sender에게 현재 빈공간이 얼마나 남았는지 알려주고,
+> sender 는 이를 통해 flow control을 한다.<br/>
+
+Receive buffer : in-order delivery를 위해 사용된다.<br/>
 
 - TCP fast retransmit : 1 2 3 4 5 번 sequence 만약 이 중 하나가 유실됐다면,
  같은 ack가 중복해서 보내진다. 이 중복횟수가 3번이되면 재전송한다.<br/>
 
-flow control : receiver는 sender에게 현재 빈공간(receive window size)이 얼마나 남았는지 알려주고,
-sender 는 이를 통해 flow control을 한다.<br/>
+
 
 
 
