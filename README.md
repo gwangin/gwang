@@ -1,7 +1,7 @@
 # Computer Network
 -----------------
 ## 1강 정리
-#### Application Layer
+### Application Layer
 
 <br/><br/>
 
@@ -131,10 +131,17 @@ goal : satisfy client request without involving origin
  HTTP 설명 끝.
 트래픽 등등 여러가지 문제 발생 - >  캐시를 두거나 계층화 
 - #### DNS(domain name system)
+
+- > Domain name을 IP address로 바꿔주는 시스템이다.<br/>
+UDP를 사용한다.<br/>
+client와 server로 구성되어 있다.<br/>
+client가 DNS server에게 query를 보내고, DNS server가 client에게 response를 보내는 구조이다.<br/>
+
+
 host domain name - IP address(network address) 의  column
 
-이 큰 DATA base를 관리하기 위해 server를 분산, 계층화 시켜놓음.
-관리가 용이 + 검색이 빠르게...
+이 큰 DATA base를 관리하기 위해 server를 분산, 계층화 시켜놓음.<br/>
+관리가 용이 + 검색이 빠르게
 
 
 #### TLD (top-level domain) servers : <br/>
@@ -247,4 +254,80 @@ TCP socket들은 고유의 번호를 가지는게 아니라 고유의 index,ID�
 - > Socket과 Port는 같은 개념이 아니다.<br/>
 하나의 process가 여러개의 socket을 가질 수 있다.<br/>
 sender의 ip, port, receiver의 ip, port 조합 -> 유일하게 한 개!<br/>
+
+
+
+----------------
+## 5강 정리
+
+### TCP <br/>
+TCP는 **reliable data transfer**를 제공한다.<br/>
+- RDT(reliable data transfer)<br/> 
+    -  Channel with bit errors
+        1. checksum<br/>
+        checksum을 통해 에러를 검출한다.(ACK, NACK)<br/>
+        ACK/NACK 가 오류가 날수도 있다 
+        2. sequence number<br/>
+        각각의 패킷에 sequence number를 넣어 보낸다.<br/>
+    - Channel with packet loss<br/>
+        - sender가 일정시간의 ACK를 받지 못하면 timeout이 발생한다.<br/>
+        - timeout이 발생하면 sender는 timeout이 발생한 패킷을 다시 보낸다.<br/>
+
+*각각의 process는 각각의 socket, TCP를 가진다.*
+
+###  TCP 특성
+    1. Point to Point : one-sender - one-receiver
+    2. Reliable, in-order byte steam : no "message boundaries" 순서대로 전달
+    3. Pipelinee : 한번에 여러개 전송,수신 가능
+    4. Full duplex data : 양방향 전송 가능
+    5. Connection oriented : 연결이 성립되어야 전송 가능 (Handshaking)
+    6. Flow control : sender와 receiver간의 속도 조절
+
+
+-------
+## 6강 정리
+
+- pipeline : 한 데이터 처리 단계의 출력이 다음 단계의 입력으로 이어지는 형태로 연결된 구조<br/>
+- pipelining :한 번에 하나의 명령어만 실행하는 것이 아니라 하나의 명령어가 실행되는 도중에 다른 명령어 실행을 시작하는 식으로 동시에 여러 개의 명령어를 실행하는 기법<br/>
+
+
+Byte steam number : byte stream을 보낼 때 순서를 매긴다.<br/>
+- > 100byte짜리 데이터를 보내면 100byte의 처음 byte의 번호를 사용한다.<br/>
+       그 다음 150byte짜리 데이터를 보낼때 그 데이터의 sequence number는 100이 된다.<br/> 
+       ACK # 100 : 99번째 byte까지 잘 받았다 라는 뜻.<br/>
+
+
+
+- timeout : segment 를 보낸 후 timer를 작동시킨다. 이후 ack가 오지 않으면 timeout이 발생한다.<br/>
+Timeout interval : RTT(Round Trip Time) + margin 사용
+
+segment를 보낼 때 마다 RTT를 측정한다.<br/>
+
+**재전송 segment를 보낼 때는 Sample RTT를 측정하지 않는다.**<br/>
+
+Estimated RTT : ERTT = (1- alpha)* ERTT + alpha * Sample RTT(최근 RTT)<br/>
+
+
+한쌍의 socket이 TCP connection을 맺으면 TCP 쌍마다 buffer가 생성된다.
+- Application 계층에서 transport 계층으로 데이터를 보내는 속도와 TCP 의 속도가 다르다.<br/>
+
+- Send buffer는 이를 맞추기 위해 속도를 조절한다.<br/>
+전송한 segment가 ACK를 받을 때까지 재전송을 위해 send buffer에 저장된다.<br/>
+ 
+
+- > window size : sender가 receiver에게 보낼 수 있는 최대 segment의 수<br/>
+TCP는 window size를 통해 flow control을 한다.<br/>
+즉, receiver쪽 buffer가 flow control을 한다.<br/>
+flow control : receiver는 sender에게 현재 빈공간이 얼마나 남았는지 알려주고,
+sender 는 이를 통해 flow control을 한다.<br/>
+
+- Receive buffer : in-order delivery를 위해 사용된다.<br/>
+
+- TCP fast retransmit : 1 2 3 4 5 번 sequence 만약 이 중 하나가 유실됐다면,
+ 같은 ack가 중복해서 보내진다. 이 중복횟수가 3번이되면 재전송한다.<br/>
+
+flow control : receiver는 sender에게 현재 빈공간(receive window size)이 얼마나 남았는지 알려주고,
+sender 는 이를 통해 flow control을 한다.<br/>
+
+
 
