@@ -373,3 +373,8 @@ Receive buffer : in-order delivery를 위해 사용된다.<br/>
 *additive increase : increase CWND by 1 MSS per RTT<br/>*
 *multiplicative decrease : decrease CWND by half after loss*<br/>
 
+#### TCP Fairness : 
+>Router capacity = R<br/>
+>Connection 수 = K<br/>
+>Thoughput = R/K<br/>
+ <img src="TCP.jpg"  width="1000" height="570">
