@@ -324,6 +324,7 @@ Receive buffer : in-order delivery를 위해 사용된다.<br/>
 
 - TCP fast retransmit : 1 2 3 4 5 번 sequence 만약 이 중 하나가 유실됐다면,
  같은 ack가 중복해서 보내진다. 이 중복횟수가 3번이되면 재전송한다.<br/>
+ ![TCP fast retransmit]("TCP fast retransmit")
 
 
 
