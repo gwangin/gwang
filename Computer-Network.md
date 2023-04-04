@@ -360,8 +360,9 @@ Receive buffer : in-order delivery를 위해 사용된다.<br/>
 
 #### Maximum Segment Size(MSS) : 
 >단일 TCP 세그먼트 에서 수신할 수 있는 최대 데이터 양<br/>
->그렇다면 MSS는 어떻게 결정되는가?<br/>
->네트워크 상태를 보고 결정할텐데, 처음에는 어떻게 설정하는가?
+
+그렇다면 MSS는 어떻게 결정되는가?<br/>
+네트워크 상태를 보고 결정할텐데, 처음에는 어떻게 설정하는가?
 
 >1. 처음에는  1 segment씩 보낸다.<br/>
 >2. 3-way handshake가 성공하면 2 segment씩 보낸다.<br/>
