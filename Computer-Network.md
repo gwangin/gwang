@@ -457,6 +457,8 @@ IPv6로 바꾸려면 결국 라우터를 바꿔야한다.<br/>
 --------
 ## 11강 정리
 ### 라우팅 알고리즘
+#### Link State Algorithm :
+>최단 경로를 찾기 위해 모든 노드들의 정보를 모아서 계산하는 알고리즘<br/>
 #### Dijkstra's algorithm :
 >그래프에서 최단 경로를 찾는 알고리즘<br/>
 
@@ -487,4 +489,40 @@ IPv6로 바꾸려면 결국 라우터를 바꿔야한다.<br/>
     - u : 중간점
     - w(u, v) : u에서 v로 가는 가중치
 
- <img src="12강.jpg"  width="900" height="700">
+ <img src="12강.jpg"  width="700" height="500">
+
+
+#### Link cost changes :
+>링크 비용이 변경되는 경우, 라우팅 테이블을 갱신한다.<br/>
+> = 이웃으로부터 변하된 distance 정보를 받을 경우 갱신한다.<br/>
+
+
+
+-------
+## 13강 정리
+
+#### Poisoned Reverse :
+>라우팅 테이블을 갱신할 때, 해당 라우터를 거쳐가는 경로를 무효화시키는 방법<br/>
+>Loop를 방지하기 위해 사용한다.<br/>
+>역류를 방지하기 위해 해당 경로의 거리를 무한대(infinity)로 설정하여, 해당 경로를 사용하지 않도록 만드는 것이다.<br/>
+
+ <img src="13강.jpg"  width="700" height="500">
+
+#### Split Horizon :
+>라우팅 테이블을 갱신할 때, 해당 라우터를 거쳐가는 경로를 무효화시키는 방법<br/>
+
+- Poisoned reverse : 해당 경로의 거리를 무한대로 만든다.
+- Split horizon : 해당 경로를 무시한다.
+
+#### AS(Autonomous System) :
+>하나 이상의 네트워크가 함께 관리되는 하나의 독립된 시스템<br/>
+#### inter-AS routing :
+>AS 간 라우팅<br/>
+#### intra-AS routing :
+>AS 내부에서 라우팅<br/>
+
+#### BGP(Border Gateway Protocol) :
+>AS 간 라우팅을 위해 사용되는 프로토콜<br/>
+
+-------
+## 14강 정리
