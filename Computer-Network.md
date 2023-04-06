@@ -487,4 +487,4 @@ IPv6로 바꾸려면 결국 라우터를 바꿔야한다.<br/>
     - u : 중간점
     - w(u, v) : u에서 v로 가는 가중치
 
- <img src="12강.jpg"  width="700" height="570">
+ <img src="12강.jpg"  width="700" height="900">
