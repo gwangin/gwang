@@ -1,7 +1,7 @@
-# gwang# Computer Network
+# Computer Network
 -----------------
 ## 1강 정리
-### Application Layer
+
 
 <br/><br/>
 
@@ -82,7 +82,7 @@ TCP는 전송 계층에 위치한다.
 process를 어떻게 addressing을 하느냐?<br/>
 ip주소와 port number의 결합으로 만든 socket으로 addressing한다!<br/>
 
-### application 계층 :
+### Application Layer
 OS에서 제공하는 (transport 계층에서 제공) 정보를 받는다. 하지만 신뢰성 이외의 어떠한 기능도 아래계층에서 해주지 않고 있다.<br/>
  
 보안개념이 없다.<br/>
@@ -531,4 +531,12 @@ IPv6로 바꾸려면 결국 라우터를 바꿔야한다.<br/>
 
 -------
 ## 14강 정리
-#### 
+### MAC
+
+#### TDMA : Time Division Multiple Access<br/>
+#### FDMA : Frequency Division Multiple Access<br/>
+#### CSMA : Carrier Sense Multiple Access<br/>
+>채널을 사용하기 전에 채널이 사용 중인지를 확인하는 방식<br/>
+#### CSMA/CD : Carrier Sense Multiple Access with Collision Detection<br/>
+>채널을 사용하기 전에 채널이 사용 중인지를 확인하고, 충돌이 발생하면 재전송하는 방식<br/>
+------
