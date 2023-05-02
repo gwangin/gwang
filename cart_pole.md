@@ -328,77 +328,48 @@ import random
 import gymnasium as gym
 import numpy as np
 from keras.models import Sequential
-# keras의 모델을 생성하기 위한 클래스로, 
-# 순차적으로 층(layer)을 쌓아가는 방식으로 모델을 만듭니다. 
-# 층은 입력값(input)을 받아 출력값(output)을 반환하는 역할을 합니다.
-
-
 from keras.layers import Dense
-#층 중 하나로, fully connected layer라고도 부릅니다. 
-# 즉, 이전 층의 모든 뉴런과 현재 층의 모든 뉴런이 서로 연결되어 있습니다. 
-# input_dim은 입력값의 차원을 나타내며, activation은 활성화 함수를 지정합니다.
 from keras.optimizers import Adam
-
-model = Sequential() # 객체 생성
-# (출력 뉴런의 수 , 입력 뉴런의 수, 활성화 함수)
+model = Sequential()
 model.add(Dense(32, input_dim=4, activation='relu'))
-# 입력 데이터 4 차원
 model.add(Dense(16, activation='relu'))
 model.add(Dense(16, activation='relu'))
-# 복잡한 특징을 추출
 model.add(Dense(2, activation='linear'))
-# 가능한 액션의 개수에 해당하는 뉴런 수 2가지(왼, 오)
 model.compile(loss='mse', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
-# loss : 최소화해야하는 손실 함수 (mse)
-# optimizer : 최적화 알고리즘 (Adam)
-# metrics : 훈련과 테스트 단계를 모니터링하기 위해 사용
 
-
-# 카트폴 환경 생성
 env = gym.make('CartPole-v1')
 
 memory = []
 scores = []
-# 에피소드 수
+
 EPISODES = 1000
-# 타임스텝 수
 TIME_STEP = 1000
-# 탐험률 초기값
 epsilon = 1.0
 batch_size = 5
 
 
 
 for episode in range(EPISODES):
-    # 초기화
+    
     state, info = env.reset()
     
     done = False
     score = 0
-    # 탐험률 감소
     epsilon = 0.95 * epsilon
 
     for t in range(TIME_STEP):
-        # 행동 선택
-        # 초기학습에 사용. 학습초기에는 epsillon이 큰 상태이므로 action을 학습한 memory에서
-        # 선택하는 것이 아니라 무작위로 선택
+
         if np.random.rand() <= epsilon:
             action = env.action_space.sample()
         else:
             action = np.argmax(model.predict(np.array([state]), verbose=0))
-        # 환경에서 행동 수행
         next_state, reward, done, _ , _ = env.step(action)
         
-        # 보상 수정
-        # done이 True이면 -10점, done이 False이면 +1점
+
         reward = reward if not done else -10
-        # 메모리에 데이터 추가
         memory.append((state, action, reward, next_state, done))
-        # 다음 상태로 이동
         
-        # 점수 계산
-        
-        # 메모리에 데이터 수가 배치 크기에 도달하면 학습 실행
+
 
         if len(memory) > batch_size:
             minibatch = random.sample(memory, batch_size)
