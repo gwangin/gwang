@@ -115,7 +115,7 @@ model.add(Dense(2, activation='linear'))
 model.compile(loss='mse', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
 ```
 > 손실함수는 mse , 최적화 함수는 Adam으로 설정하였다.
-### Optimaiers
+### Optimizers
 1. GD : 모든 자료를 검토
 2. SGD : 일부 자료만 검토, 빠르지만 정확도가 떨어짐
 
