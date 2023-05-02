@@ -79,9 +79,34 @@ if done:
 
 #### 위의 코드에 의해 게임이 종료된다.
 >여기까지 user가 직접 게임을 플레이하는 코드로 cart-pole game의  대략적인 게임 흐름을 알아보았다. 
-
+----------------------------------------------
 ## Reinforcement Learning
-####
+## 다음 순서로 진행할 예정이다.
+
+1. model을 생성한다.
+```python
+model = Sequential()
+```
+2. model에 layer를 추가한다.
+```python
+model.add(Dense(32, input_dim=4, activation='relu'))
+model.add(Dense(16, activation='relu'))
+model.add(Dense(16, activation='relu'))
+model.add(Dense(2, activation='linear'))
+```
+3. model을 compile한다.
+```python
+model.compile(loss='mse', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
+```
+4. model을 이용하여 예측한다
+```python
+target = model.predict(state)
+```
+5. model을 학습시킨다.
+```python
+model.fit(state, target, epochs=1, verbose=0)
+```
+----------------------------------------------
 ```python
 from keras.models import Sequential
 ```
@@ -115,6 +140,7 @@ model.add(Dense(2, activation='linear'))
 model.compile(loss='mse', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
 ```
 > 손실함수는 mse , 최적화 함수는 Adam으로 설정하였다.
+#### optimzer에 대해 간략하게 공부하였다.
 ### Optimizers
 1. GD : 모든 자료를 검토
 2. SGD : 일부 자료만 검토, 빠르지만 정확도가 떨어짐
@@ -142,55 +168,22 @@ model.compile(loss='mse', optimizer=Adam(learning_rate=0.001), metrics=['accurac
 - Output layer(출력층): 입력 변수들마다의 가중치로 계산된 예측값 표현 역할 
 
  
-> Input layer(입력층)의 input_dim = 4 는 입력을 4개 받는다는 뜻이다.
-이 4가지의 입력은 카트의 위치, 카트의 속도, 막대기의 각도, 막대기의 각속도 를 의미한다.
-> Hidden layer(은닉층)의 활성화 함수는 ReLu를 사용하였다.
-> Output layer(출력층)의 활성화 함수는 회귀의 경우 linear, 다중분류의 경우 softmax를 사용한다.
+> Input layer(입력층)의 input_dim = 4 는 입력을 4개 받는다는 뜻이다.</br>
+이 4가지의 입력은 카트의 위치, 카트의 속도, 막대기의 각도, 막대기의 각속도 를 의미한다.</br>
+> Hidden layer(은닉층)의 활성화 함수는 ReLu를 사용하였다.</br>
+> Output layer(출력층)의 활성화 함수는 회귀의 경우 linear, 다중분류의 경우 softmax를 사용한다.</br>
 >첫번째 Layer의 입력차원은 4차원이다, 이는 카트의 위치, 카트의 속도, 막대기의 각도, 막대기의 각속도를 의미한다.</br>
->각 Layer의 출력과 다음 Layer의 입력은 꼭 같을 필요는 없다. 학습모델에 따라서 달라진다.
->Hidden Layer의 활성화 함수는 relu를 사용하였다.
->ReLU로 학습을 해본후 leakyReLU 등등 다른 actibation function도 사용해봐야겠다.
->마지막 Layer의 출력은 가능한 액션의 개수에 해당하는 뉴런 수 2가지(왼, 오)이다.
->마지막 Layer의 활성화 함수는 linear를 사용하였다.
->마지막 Layer의 활성화 함수는 일반적으로 회귀에는 linear, 분류에는 softmax를 사용한다.
+>각 Layer의 출력과 다음 Layer의 입력은 꼭 같을 필요는 없다. 학습모델에 따라서 달라진다.</br>
+>Hidden Layer의 활성화 함수는 relu를 사용하였다.</br>
+>ReLU로 학습을 해본후 leakyReLU 등등 다른 actibation function도 사용해봐야겠다.</br>
+>마지막 Layer의 출력은 가능한 액션의 개수에 해당하는 뉴런 수 2가지(왼, 오)이다.</br>
+>마지막 Layer의 활성화 함수는 linear를 사용하였다.</br>
+>마지막 Layer의 활성화 함수는 일반적으로 회귀에는 linear, 분류에는 softmax를 사용한다.</br>
 
-## Q-learning을 다음 순서로 진행할 예정이다.
-
-1. model을 생성한다.
-```python
-model = Sequential()
-```
-2. model에 layer를 추가한다.
-```python
-model.add(Dense(32, input_dim=4, activation='relu'))
-model.add(Dense(16, activation='relu'))
-model.add(Dense(16, activation='relu'))
-model.add(Dense(2, activation='linear'))
-```
-3. model을 compile한다.
-```python
-model.compile(loss='mse', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
-```
-4. model을 이용하여 예측한다
-```python
-target = model.predict(state)
-```
-5. model을 학습시킨다.
-```python
-model.fit(state, target, epochs=1, verbose=0)
-```
-
-
-
-#### 다음은 q-learning을 위한 벨만방정식 코드이다.
-```python
-np.amax(array, axis=None, out=None, keepdims=<no value>, initial=<no value>)
-target = (reward + 0.95 * np.amax(model.predict(next_state, verbose = 0), axix=1))
-```
-
-#### axis 매개변수는 다차원 배열에서 연산을 수행할 축(axis)을 지정하는 매개변수입니다.</br>
-#### 예를 들어, 2차원 배열에서 axis=0으로 설정하면, 각 열(column)을 기준으로 연산을 수행하며, axis=1로 설정하면 각 행(row)을 기준으로 연산을 수행합니다.<br/>
-#### np.amax() 함수에서 axis 매개변수는 최대값을 찾을 축을 지정합니다. 따라서 np.amax(array, axis=1)은 2차원 배열에서 각 행(row)마다 최대값을 찾아 반환합니다.</br>
+#### 다음은 amax() 함수를 공부한 내용이다. 이 코드에서는 시행착오 끝에 쓰이지 않았다.
+>axis 매개변수는 다차원 배열에서 연산을 수행할 축(axis)을 지정하는 매개변수입니다.</br>
+>예를 들어, 2차원 배열에서 axis=0으로 설정하면, 각 열(column)을 기준으로 연산을 수행하며, axis=1로 설정하면 각 행(row)을 기준으로 연산을 수행합니다.<br/>
+>np.amax() 함수에서 axis 매개변수는 최대값을 찾을 축을 지정합니다. 따라서 np.amax(array, axis=1)은 2차원 배열에서 각 행(row)마다 최대값을 찾아 반환합니다.</br>
 
 예를 들어, 
 ```python
@@ -198,52 +191,37 @@ array = np.array([[1,2,3],[4,5,6]])
 ```
 이라는 2차원 배열이 있을 때, np.amax(array, axis=1)을 실행하면 [3, 6]이 반환됩니다. </br>
 첫 번째 행에서 최대값은 3이며, 두 번째 행에서 최대값은 6입니다.</br>
-> amax를 이용하여 최대 q-value를 구해보려고 하였지만 실패했습니다. </br>
+##### argmax() 함수는 최대값을 가진 인덱스를 반환하고, amax() 함수는 최대값을 반환한다.
+
 
 #### 초기학습과 minibatch를 이용한 학습을 구분하여 진행하였다.
 #### 초기학습은 다음과 같이 구현하였다.
 ```python
 if np.random.rand() <= epsilon:
     action = env.action_space.sample()
+```
+>학습초반에는 엡실론값이 커서 학습한 데이터보다는 다른 방향으로 탐험을 해야하므로 엡실론 값과비교하여 작은 값이 나오면 랜덤으로 행동<br/>
+```python
 else:
     action = np.argmax(model.predict(np.array([state]), verbose=0))
     next_state, reward, done, _ , _ = env.step(action)
 ```
->학습초반에는 엡실론값이 커서 학습한 데이터보다는 다른 방향으로 탐험을 해야하므로 엡실론 값과비교하여 작은 값이 나오면 랜덤으로 행동<br/>
->앱실론 값보다 크면 학습데이터 즉, 현재 state에서 가장 큰 q-value를 가지는 action을 선택한다.
-#### 다음과 같이 minibatch를 이용해 학습하는 코드를 구성하였다.
-
+>앱실론 값보다 크면 학습데이터 즉, 현재 state에서 가장 큰 q-value를 가지는 action을 선택한다.<br/>
+>처음에는 model.predict에 state를 바로 넣어 사용하였다. 
 ```python
-        # 메모리에 데이터 수가 배치 크기에 도달하면 학습 실행
-        if len(memory) > batch_size:
-            minibatch = random.sample(memory, batch_size)
-            for state, action, reward, next_state, done in minibatch:
-                if done:
-                    target_f = model.predict(state, verbose=0)
-                elif not done:
-                    reward = (reward + 0.95 *
-                              np.max(model.predict(next_state, verbose = 0), axix=1))
-                model.fit(state, target_f, epochs=1, verbose=0)
+action = np.argmax(model.predict(state, verbose=0))
 ```
-```python
-action = np.argmax(model.predict(state))
-```
-#### 이 부분에서 오류가 발생한다.
->학습데이터가 mini batch사이즈보다 많이 쌓이면 mini batch사이즈만큼 랜덤하게 뽑아서 학습을 진행한다.
->minibatch에서 state, action, reward, next_state, done을 뽑아서 target을 계산한다
->하지만 계속 array size에 대한 오류가 뜬다.
+하지만 다음과 같은 오류가 발생하였다.<br/>
 ```phython
 In[0] and In[1] has different ndims: [4] vs. [4,32]
          [[{{node sequential/dense/Relu}}]] [Op:__inference_predict_function_1384]
 ```
-입력층의 차원배열 오류가 계속해서 발생한다.
+그래서
 ```python
 state = np.reshape(state, [1, 4])
 ```
 를 이용해서 차원을 맞춰주려했지만 계속 실패하고 있다.
 #### state, action, done의 배열을 다시 확인해봐야겠다.
-
-
 ```python
 import random
 import gymnasium as gym
@@ -273,6 +251,38 @@ for i in range(10):
 ```
 model만 따로 분리해서 몇차원 배열인지 확인해 보았다
 state는 [ 0.0443348  -0.02882837 -0.00968079 -0.00089348] 형태이므로 1차원 배열이다.
+>그래서 np.array([state])로 바꾸어 사용하였다.
+
+
+
+#### 다음과 같이 minibatch를 이용해 학습하는 코드를 구성하였다.
+
+```python
+        # 메모리에 데이터 수가 배치 크기에 도달하면 학습 실행
+        if len(memory) > batch_size:
+            minibatch = random.sample(memory, batch_size)
+            for state, action, reward, next_state, done in minibatch:
+                if done:
+                    target_f = model.predict(state, verbose=0)
+                elif not done:
+                    reward = (reward + 0.95 *
+                              np.max(model.predict(next_state, verbose = 0), axix=1))
+                model.fit(state, target_f, epochs=1, verbose=0)
+```
+```python
+action = np.argmax(model.predict(state))
+```
+#### 이 부분에서 오류가 발생한다.
+>학습데이터가 mini batch사이즈보다 많이 쌓이면 mini batch사이즈만큼 랜덤하게 뽑아서 학습을 진행한다.
+>minibatch에서 state, action, reward, next_state, done을 뽑아서 target을 계산한다
+>하지만 계속 array size에 대한 오류가 뜬다.
+```phython
+In[0] and In[1] has different ndims: [4] vs. [4,32]
+         [[{{node sequential/dense/Relu}}]] [Op:__inference_predict_function_1384]
+```
+입력층의 차원배열 오류가 계속해서 발생한다.
+
+
 
 
 
