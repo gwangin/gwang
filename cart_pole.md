@@ -266,10 +266,7 @@ state는 [ 0.0443348  -0.02882837 -0.00968079 -0.00089348] 형태이므로 1차�
 
 
 
-```python
-action = np.argmax(model.predict(np.array([state])))
-```
->np.array(np.array([state]))를 통해 2차원 numpy array로 바꿔주었다.
+
 ```python
 states = np.array([x[0] for x in minibatch])
 actions = np.array([x[1] for x in minibatch])
