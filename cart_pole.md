@@ -201,7 +201,18 @@ array = np.array([[1,2,3],[4,5,6]])
 > amax를 이용하여 최대 q-value를 구해보려고 하였지만 실패했습니다. </br>
 
 #### 초기학습과 minibatch를 이용한 학습을 구분하여 진행하였다.
->다음과 같이 minibatch를 이용한 코드를 구성하였다.
+#### 초기학습은 다음과 같이 구현하였다.
+```python
+if np.random.rand() <= epsilon:
+    action = env.action_space.sample()
+else:
+    action = np.argmax(model.predict(np.array([state]), verbose=0))
+    next_state, reward, done, _ , _ = env.step(action)
+```
+>학습초반에는 엡실론값이 커서 학습한 데이터보다는 다른 방향으로 탐험을 해야하므로 엡실론 값과비교하여 작은 값이 나오면 랜덤으로 행동<br/>
+>앱실론 값보다 크면 학습데이터 즉, 현재 state에서 가장 큰 q-value를 가지는 action을 선택한다.
+#### 다음과 같이 minibatch를 이용해 학습하는 코드를 구성하였다.
+
 ```python
         # 메모리에 데이터 수가 배치 크기에 도달하면 학습 실행
         if len(memory) > batch_size:
