@@ -425,3 +425,5 @@ for episode in range(EPISODES):
         print("Solved after {} episodes!".format(episode))
         break
 ```
+<img src="ep150.PNG"  width="1000" height="570">
+<img src="ep200.PNG"  width="1000" height="570">
