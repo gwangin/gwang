@@ -1,7 +1,5 @@
 # Cart_Pole with reinforcement learning
-123213123213
-123213213<br>
-123213213
+
 #### 액션 정의
 
 ```python
